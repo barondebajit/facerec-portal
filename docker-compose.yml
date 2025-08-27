@@ -1,0 +1,28 @@
+services:
+  api:
+    build: ./backend
+    container_name: facerec_api
+    ports: ["8000:8000"]
+    environment:
+      - SIMILARITY_THRESHOLD=0.35
+      - LOG_LEVEL=info
+    volumes:
+      - ./backend/data:/app/data
+      - insightface_models:/root/.insightface
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [appnet]
+  web:
+    build: ./frontend
+    container_name: facerec_web
+    ports: ["80:80"]
+    depends_on: [api]
+    networks: [appnet]
+volumes:
+  insightface_models:
+networks:
+  appnet:
+    driver: bridge
