@@ -1,6 +1,6 @@
-# FaceRec Portal (Dockerized, React + FastAPI + InsightFace)
+# FaceRec Portal
 
-An end-to-end facial recognition portal with two flows:
+An end-to-end facial recognition portal with two utilities:
 - **Register**: capture multiple camera snapshots + enter a name → store embeddings in the backend
 - **Identify**: snap a frame → match against stored identities using cosine similarity
 
